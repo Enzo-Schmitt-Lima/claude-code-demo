@@ -1,0 +1,14 @@
+=== Demonstração: controle de versão com Git ===
+
+--- Histórico de commits criados pelo Claude Code nesta sessão ---
+* fd8f16f (HEAD -> master) Adiciona demonstrações de terminal (sysinfo) e busca (grep/find)
+* 10cd814 Adiciona suite de testes e resultado da execução (unittest)
+* 1a411e2 Adiciona TaskManager: exemplo de geração de código pelo Claude Code
+
+--- Status atual ---
+No ramo master
+Arquivos não monitorados:
+  (utilize "git add <arquivo>..." para incluir o que será submetido)
+	04-git-versionamento/
+
+nada adicionado ao envio mas arquivos não registrados estão presentes (use "git add" to registrar)
