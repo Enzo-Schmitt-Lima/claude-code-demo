@@ -1,0 +1,15 @@
+=== Demonstração: busca e exploração de código (grep/find) ===
+
+--- Todas as definições de função/classe em arquivos .py ---
+01-arquivos-e-codigo/task_manager.py:6:class Task:
+01-arquivos-e-codigo/task_manager.py:11:class TaskManager:
+01-arquivos-e-codigo/test_task_manager.py:6:class TestTaskManager(unittest.TestCase):
+
+--- Todos os arquivos do projeto (find) ---
+./01-arquivos-e-codigo/__pycache__/task_manager.cpython-310.pyc
+./01-arquivos-e-codigo/__pycache__/test_task_manager.cpython-310.pyc
+./01-arquivos-e-codigo/resultado_dos_testes.txt
+./01-arquivos-e-codigo/task_manager.py
+./01-arquivos-e-codigo/test_task_manager.py
+./02-terminal-bash/sysinfo.txt
+./03-busca-e-exploracao/busca_exemplo.txt

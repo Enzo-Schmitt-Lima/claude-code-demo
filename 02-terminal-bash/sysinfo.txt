@@ -1,0 +1,24 @@
+=== Demonstração: comandos de terminal executados pelo Claude Code ===
+
+--- Data/hora ---
+qua 19 ago 2026 14:18:15 -03
+
+--- Sistema operacional ---
+Linux enzo-Inspiron-15-3530 6.8.0-136-generic #136~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul  3 16:29:11 UTC  x86_64 x86_64 x86_64 GNU/Linux
+
+--- Uso de disco (resumo) ---
+Sist. Arq.      Tam. Usado Disp. Uso% Montado em
+/dev/nvme0n1p3  456G   46G  388G  11% /
+
+--- Memória ---
+               total       usada       livre    compart.  buff/cache  disponível
+Mem.:           15Gi       4,9Gi       3,0Gi       864Mi       7,4Gi       9,3Gi
+Swap:          2,0Gi          0B       2,0Gi
+
+--- Processos com mais uso de CPU (top 5) ---
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+enzo        5945 21.9  3.4 1530553468 548832 ?   Sl   13:52   5:40 /usr/lib/claude-desktop/claude-desktop --type=renderer --crashpad-handler-pid=5813 --enable-crash-reporter=5c377cbd-01a5-4c20-aa06-446c0410b50e,no_channel --user-data-dir=/home/enzo/.config/Claude --standard-schemes=cowork-artifact,cowork-file,claude-media,claude-simulator,app --secure-schemes=cowork-artifact,cowork-file,claude-media,claude-simulator,app,sentry-ipc --bypasscsp-schemes=claude-media,claude-simulator,sentry-ipc --cors-schemes=claude-simulator,sentry-ipc --fetch-schemes=cowork-artifact,cowork-file,claude-simulator,app,sentry-ipc --service-worker-schemes=app --streaming-schemes=cowork-file,claude-media,claude-simulator --app-path=/usr/lib/claude-desktop/resources/app.asar --enable-sandbox --ozone-platform=wayland --lang=pt-BR --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=7 --time-ticks-at-unix-epoch=-1787158079635798 --launch-time-ticks=265579944 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,2754109635870347024,4365463623233989295,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,GlobalShortcutsPortal,GlobalShortcutsPortalPreferredTrigger,IsolatesPriorityUseProcessPriority,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,14540506683119129946,867043879154625600,4 --trace-process-track-uuid=3190708992871164437 --disable-logging --desktop-features={"launch":{"status":"supported"},"coworkBrowser":{"status":"uns
+enzo        2402 12.4  1.8 6251780 302428 ?      Ssl  13:48   3:43 /usr/bin/gnome-shell
+enzo       17061 12.3  0.4 875580 75608 ?        Sl   14:18   0:00 /usr/bin/nautilus --gapplication-service
+enzo        5842 10.3  1.6 51362444 263796 ?     Sl   13:52   2:40 /usr/lib/claude-desktop/claude-desktop --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=5813 --enable-crash-reporter=5c377cbd-01a5-4c20-aa06-446c0410b50e,no_channel --user-data-dir=/home/enzo/.config/Claude --gpu-preferences=UAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,2754109635870347024,4365463623233989295,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,GlobalShortcutsPortal,GlobalShortcutsPortalPreferredTrigger,IsolatesPriorityUseProcessPriority,PdfUseShowSaveFilePicker --disable-features=DropInputEventsWhilePaintHolding,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --pseudonymization-salt-handle=7,i,14540506683119129946,867043879154625600,4 --trace-process-track-uuid=3190708988185955192 --disable-logging
+enzo       16619  7.8  1.6 1520651148 260812 ?   Sl   14:17   0:05 /opt/google/chrome/chrome --type=renderer --crashpad-handler-pid=3948 --enable-crash-reporter=51c9f085-7d5a-4d5e-9869-7cc63ed61815, --change-stack-guard-on-fork=enable --ozone-platform=wayland --lang=pt-BR --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=150 --time-ticks-at-unix-epoch=-1787158079635798 --launch-time-ticks=1749793769 --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,5640625063262350708,18056172009413403889,2097152 --field-trial-handle=3,i,241587145338083510,14958173681503036791,262144 --disable-features=EyeDropper --variations-seed-version=20260818-090057.333000-production --pseudonymization-salt-handle=7,i,5417966399758559529,9930444028489185560,4 --trace-process-track-uuid=3190709126868148844
