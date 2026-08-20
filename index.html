@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Capabilities</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #F1F2F4;
+    --surface: #FFFFFF;
+    --surface-2: #E8EAED;
+    --text: #1B1D22;
+    --text-dim: #5B5F68;
+    --accent: #B5651D;
+    --accent-soft: #E9CBAA;
+    --accent2: #3C6E68;
+    --accent2-soft: #CFE3E0;
+    --border: #D8DADD;
+    --code-bg: #1B1D22;
+    --code-text: #EDEEF0;
+    --code-accent: #E7A25C;
+    --shadow: 0 1px 2px rgba(20,22,27,0.04), 0 8px 24px rgba(20,22,27,0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161B;
+      --surface: #1D2027;
+      --surface-2: #23262E;
+      --text: #EDEEF0;
+      --text-dim: #9CA0A8;
+      --accent: #E08A42;
+      --accent-soft: #4A3521;
+      --accent2: #6FB2A9;
+      --accent2-soft: #223834;
+      --border: #2B2E36;
+      --code-bg: #0E0F13;
+      --code-text: #E4E6EA;
+      --code-accent: #E7A25C;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161B;
+    --surface: #1D2027;
+    --surface-2: #23262E;
+    --text: #EDEEF0;
+    --text-dim: #9CA0A8;
+    --accent: #E08A42;
+    --accent-soft: #4A3521;
+    --accent2: #6FB2A9;
+    --accent2-soft: #223834;
+    --border: #2B2E36;
+    --code-bg: #0E0F13;
+    --code-text: #E4E6EA;
+    --code-accent: #E7A25C;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-soft); }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 72px) 20px 96px;
+  }
+
+  .hero {
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  h1 {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+  h1 .cursor {
+    display: inline-block;
+    width: 0.55ch;
+    background: var(--accent);
+    margin-left: 4px;
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { h1 .cursor { animation: none; } }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 62ch;
+    margin: 0 0 10px;
+  }
+  .hero .path {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: inline-block;
+    margin-top: 12px;
+    word-break: break-all;
+  }
+
+  .section-head {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 0 0 20px;
+    padding-top: 4px;
+  }
+
+  .cap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+  .cap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 22px clamp(18px, 3vw, 28px);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 4px 20px;
+  }
+  .cap-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+  .cap-body { min-width: 0; }
+  .cap-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .cap-title {
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .cap-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: var(--accent2-soft);
+    border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .cap-desc {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0 0 14px;
+    max-width: 60ch;
+  }
+  .cap-folder {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin: 0 0 12px;
+  }
+  .cap-folder a { color: var(--accent2); text-decoration: none; border-bottom: 1px solid transparent; }
+  .cap-folder a:hover { border-bottom-color: currentColor; }
+
+  pre.snippet {
+    margin: 0;
+    background: var(--code-bg);
+    color: var(--code-text);
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  pre.snippet .c1 { color: var(--code-accent); }
+  pre.snippet .dim { opacity: 0.55; }
+
+  @media (max-width: 520px) {
+    .cap { grid-template-columns: 1fr; }
+    .cap-num { font-size: 1.2rem; }
+  }
+
+  .also-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .also-card {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .also-card h3 {
+    font-size: 0.95rem;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .also-card p {
+    font-size: 0.86rem;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  footer a { color: var(--accent2); }
+
+  code.inline {
+    font-family: "IBM Plex Mono", monospace;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 0.88em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">execução real nesta máquina</div>
+    <h1>O que o Claude Code<br>pode fazer<span class="cursor">&nbsp;</span></h1>
+    <p>Este não é um pitch — é um índice do que foi de fato executado agora,
+    numa pasta local. Cada item abaixo tem um resultado real gerado por
+    código, testes, git, buscas e agentes rodando de verdade.</p>
+    <span class="path">~/Documentos/Pessoais/Projeto_claude/</span>
+  </div>
+
+  <div class="section-head">Demonstrado agora — com arquivos reais</div>
+  <div class="cap-list">
+
+    <div class="cap">
+      <div class="cap-num">01</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Escrever e editar código</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Gera módulos inteiros, escreve testes para eles e roda a suíte até fechar verde — sem sair do terminal.</p>
+        <p class="cap-folder">→ <a href="01-arquivos-e-codigo/task_manager.py">01-arquivos-e-codigo/task_manager.py</a></p>
+        <pre class="snippet"><span class="dim">$</span> python3 -m unittest test_task_manager -v
+test_add_task <span class="c1">... ok</span>
+test_complete_task <span class="c1">... ok</span>
+test_complete_missing_task_returns_false <span class="c1">... ok</span>
+test_pending_only_returns_incomplete <span class="c1">... ok</span>
+
+<span class="c1">OK</span> — 4 tests in 0.000s</pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">02</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Executar comandos no terminal</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Roda comandos de shell diretamente na sua máquina — <code class="inline">bash</code>, utilitários Unix, scripts — e lê a saída real.</p>
+        <p class="cap-folder">→ <a href="02-terminal-bash/sysinfo.txt">02-terminal-bash/sysinfo.txt</a></p>
+        <pre class="snippet"><span class="dim">$</span> uname -a
+Linux enzo-Inspiron-15-3530 6.8.0-136-generic x86_64
+<span class="dim">$</span> df -h /
+<span class="c1">456G</span> total · 46G usado · 388G livre (11%)</pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">03</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Buscar e explorar código</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Varre uma árvore de arquivos inteira com <code class="inline">grep</code>/<code class="inline">find</code> para localizar definições, padrões e estrutura em segundos.</p>
+        <p class="cap-folder">→ <a href="03-busca-e-exploracao/busca_exemplo.txt">03-busca-e-exploracao/busca_exemplo.txt</a></p>
+        <pre class="snippet"><span class="dim">$</span> grep -rn "^def \|^class " --include="*.py" .
+task_manager.py:6:<span class="c1">class Task:</span>
+task_manager.py:11:<span class="c1">class TaskManager:</span>
+test_task_manager.py:6:<span class="c1">class TestTaskManager</span>(unittest.TestCase):</pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">04</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Controle de versão com Git</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Inicializa repositórios, faz commits incrementais com mensagens que contam a história do trabalho — do jeito que um dev faria.</p>
+        <p class="cap-folder">→ <a href="04-git-versionamento/git_demo.txt">04-git-versionamento/git_demo.txt</a></p>
+        <pre class="snippet"><span class="dim">$</span> git log --oneline --graph
+<span class="c1">*</span> d862b5d Adiciona demos de pesquisa web, subagentes...
+<span class="c1">*</span> fd8f16f Adiciona demonstrações de terminal e busca
+<span class="c1">*</span> 10cd814 Adiciona suíte de testes e resultado
+<span class="c1">*</span> 1a411e2 Adiciona TaskManager</pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">05</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Pesquisar na web</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Busca informação atual fora do próprio conhecimento, lê os resultados e resume com fontes citadas.</p>
+        <p class="cap-folder">→ <a href="05-pesquisa-web/pesquisa_claude_code.md">05-pesquisa-web/pesquisa_claude_code.md</a></p>
+        <pre class="snippet"><span class="dim">busca:</span> "Claude Code CLI features 2026"
+<span class="c1">→</span> sub-agentes aninhados, fallbackModel,
+  marketplace de ferramentas, atribuição de custo
+<span class="dim">5 fontes citadas</span></pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">06</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Delegar tarefas a subagentes</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Despacha um agente especializado para investigar algo em paralelo, mantendo a conversa principal enxuta.</p>
+        <p class="cap-folder">→ <a href="06-subagentes/relatorio_subagente.md">06-subagentes/relatorio_subagente.md</a></p>
+        <pre class="snippet"><span class="dim">agent:</span> Explore
+<span class="dim">tarefa:</span> mapear todo o projeto de demo
+<span class="c1">→</span> relatório de 7 pastas devolvido
+  sem gastar contexto da conversa principal</pre>
+      </div>
+    </div>
+
+    <div class="cap">
+      <div class="cap-num">07</div>
+      <div class="cap-body">
+        <div class="cap-top">
+          <h3 class="cap-title">Automação de navegador</h3>
+          <span class="cap-tag">ao vivo</span>
+        </div>
+        <p class="cap-desc">Abre um navegador real, navega, lê o conteúdo renderizado — e, em outros casos, clica e preenche formulários.</p>
+        <p class="cap-folder">→ <a href="07-navegador/navegacao_docs.md">07-navegador/navegacao_docs.md</a></p>
+        <pre class="snippet"><span class="dim">visitado:</span> code.claude.com
+<span class="c1">→</span> "Claude Code is an AI-powered coding
+  assistant that helps you build features,
+  fix bugs, and automate development tasks."</pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head">Também disponível nesta sessão — sem arquivo de demo</div>
+  <div class="also-grid">
+    <div class="also-card">
+      <h3>Artifacts</h3>
+      <p>Publica páginas HTML/Markdown interativas e compartilháveis — como esta.</p>
+    </div>
+    <div class="also-card">
+      <h3>Integrações conectadas</h3>
+      <p>Google Calendar, Gmail, Drive, Notion, Figma e um quadro visual — lê e edita quando autorizado.</p>
+    </div>
+    <div class="also-card">
+      <h3>Skills</h3>
+      <p>Rotinas prontas: gerar .docx, .pptx, .xlsx, .pdf, revisão de código, design de artifacts.</p>
+    </div>
+    <div class="also-card">
+      <h3>Agendamento</h3>
+      <p>Tarefas recorrentes e loops — roda algo a cada intervalo ou num horário marcado.</p>
+    </div>
+    <div class="also-card">
+      <h3>Refatoração em larga escala</h3>
+      <p>Edições coordenadas em múltiplos arquivos, com testes guiando cada mudança.</p>
+    </div>
+    <div class="also-card">
+      <h3>Revisão de segurança</h3>
+      <p>Analisa diffs e código em busca de vulnerabilidades antes de ir pra produção.</p>
+    </div>
+  </div>
+
+  <footer>
+    Gerado e executado por Claude Code · projeto local em <code class="inline">Projeto_claude/</code> ·
+    <a href="README.md">README</a>
+  </footer>
+
+</div>
+</body>
+</html>
